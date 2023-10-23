@@ -8,7 +8,7 @@ f0=50;
 T=1/f0;
 
 % Precisión de muestreo continua
-tpress = 100;
+tpress = 1000;
 % Frecuencia de muestreo
 fs = 2000;
 % Número de periodos a representar
@@ -44,27 +44,27 @@ hold off;
 
 %% 3. Análisis en frecuencia
 % fft
-X=fft(x_n);
+X_n=fft(x_n);
 
 % Total de muestras
-Ln = length(X);
+Ln = length(X_n);
 % Intervalo muestras
 fstep = fs/Ln;
 % Frecuencias
 f = 0:fstep:fs-fstep;
 
 % FT "matemática"
-X = abs(X / Ln);
-u.graficarBarras(f,X,2,"Transformada de Fourier(duplicada)","frecuencia", "amplitud");
+X_n = abs(X_n / Ln);
+u.graficarBarras(f,X_n,2,"Transformada de Fourier(duplicada)","frecuencia", "amplitud");
 
 % FT "física"
-X = X(1:Ln/2+1);
-X(2:end-1) = 2*X(2:end-1);
+X_n = X_n(1:Ln/2+1);
+X_n(2:end-1) = 2*X_n(2:end-1);
 f = 0:fstep:fs/2;
-u.graficarBarras(f,X,3,"Transformada de Fourier (real)","frecuencia", "amplitud");
+u.graficarBarras(f,X_n,3,"Transformada de Fourier (real)","frecuencia", "amplitud");
 
 
-%% 3. Analisis frecuencias mezcla
+%% 4. Analisis frecuencias mezcla
 % Amplitud 2
 A_2=8;
 % Frecuencia base 2
@@ -80,7 +80,7 @@ subplot(3,1,1);
 u.graficar(n,x_n, 4, "Senoidal f=50", "tiempo", "amplitud");
 
 subplot(3,1,2);
-u.graficar(n,x_n, 4, "Senoidal f=250", "tiempo", "amplitud");
+u.graficar(n,x_n2, 4, "Senoidal f=250", "tiempo", "amplitud");
 
 subplot(3,1,3)
 u.graficar(n,x_mix, 4, "Mezcla de funciones senoidales", "tiempo", "amplitud");
@@ -88,4 +88,13 @@ u.graficar(n,x_mix, 4, "Mezcla de funciones senoidales", "tiempo", "amplitud");
 % Analisis de Fourier
 [f, X_mix] = FuncUtils.FourierAnalis(x_mix,fs);
 u.graficarBarras(f, X_mix, 5, "Analisis de Fourier de la mezcla", "frecuencia", "amplitud");
+
+
+%% 5. Comprobación del teorema de Parseval
+% Potencia media por tiempo
+pm_t = sum(abs(x_n).^2);
+disp(['Potencia media por tiempo:  ' num2str(pm_t)]);
+
+pm_f = sum(abs(fft(X_n)).^2);
+disp(['Potencia media por fourier: ' num2str(pm_f)]);
 

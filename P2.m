@@ -28,32 +28,37 @@ H = 1 ./ (1 + sqrt(2)*(s/w1) + (s/w2).^2);
 Hmod = abs(H);
 
 %a)
-ru.graficar(w, Hmod, 3, "Filtro paso bajo", "radianes", " filtro")
+ru.graficar(w, Hmod, 3, "Filtro paso bajo", "radianes", "modulo")
 
 %b)
-ru.graficarLogX(w, Hmod, 4, "Filtro paso bajo", "radianes", "filtro");
+ru.graficarLogX(w, Hmod, 4, "Filtro paso bajo", "radianes", "modulo");
 
 %c)
 Hdb = 20*log10(Hmod);
-ru.graficar(w, Hdb, 5, "Filtro paso bajo", "radianes", " filtro")
+ru.graficar(w, Hdb, 5, "Filtro paso bajo", "radianes", "modulo db")
 
 %d)
-ru.graficarLogX(w, Hdb, 6, "Filtro paso bajo", "radianes", "filtro");
+ru.graficarLogX(w, Hdb, 6, "Filtro paso bajo", "radianes", "modulo db");
 
 %e)
 figure(7);
 subplot(2,1,1);
-plot(w,Hdb);
+semilogx(w,Hdb);
 ru.decorarGrafica(7,"Módulo en db", "radianes","filtro");
 
 subplot(2,1,2);
-plot(w,angle(H)/pi*180);
-ru.decorarGrafica(7,"Argumento en grados sexagesimales", "radianes","filtro");
+semilogx(w,angle(H)/pi*180);
+ru.decorarGrafica(7,"Argumento en grados sexagesimales", "radianes","argumento");
 
 
-ru.graficarLogX(f, Hmod, 8, "Filtro paso bajo", "frecuencias", " filtro")
+ru.graficarLogX(f, Hmod, 8, "Filtro paso bajo", "frecuencias", "módulo")
+ru.graficarLogX(f, Hdb, 9, "Filtro paso bajo ", "frecuencias", "módulo db")
+% 0.7
+% -3db
+% f_corte = 821.5;
+% filtro paso bajo
 
-%% Hallar señal de salida
+%% 4. Hallar señal de salida
 
 S = X .* Hmod;
-ru.graficarBarras(f, S, 9, "Fourier de la filtrada", "frecuencia", "amplitud");
+ru.graficarBarras(f, S, 10, "Fourier de la filtrada", "frecuencia", "amplitud");

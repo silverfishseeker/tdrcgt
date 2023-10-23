@@ -37,6 +37,7 @@ classdef RepUtils
         
         
         function[] = decorarGrafica(~, figura, titulo, xTag, yTag)
+            figure(figura);
             title(titulo);
             grid on;
             xlabel(xTag);

@@ -75,14 +75,17 @@ x_n2 = A_2*sin(2*pi*f0_2*n);
 % Señal suma
 x_mix = x_n + x_n2;
 
-figure(4)
-subplot(3,1,1)
+figure(4);
+subplot(3,1,1);
 u.graficar(n,x_n, 4, "Sinusoidal f=50", "tiempo", "amplitud");
 
-subplot(3,1,2)
+subplot(3,1,2);
 u.graficar(n,x_n, 4, "Sinusoidal f=250", "tiempo", "amplitud");
 
 subplot(3,1,3)
 u.graficar(n,x_mix, 4, "Mezcla de funciones sinusoidales", "tiempo", "amplitud");
 
-%
+% Analisis de Fourier
+[f, X_mix] = FuncUtils.FourierAnalis(x_mix,fs);
+u.graficarBarras(f, X_mix, 5, "Analisis de Fourier de la mezcla", "frecuencia", "amplitud");
+

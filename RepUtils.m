@@ -35,6 +35,12 @@ classdef RepUtils
             self.decorarGrafica(figura, titulo, xTag, yTag);
         end
         
+        function[] = graficarLogX(self, x, y, figura, titulo, xTag, yTag)
+            % Grafica continua
+            figure(figura);
+            semilogx(x,y);
+            self.decorarGrafica(figura, titulo, xTag, yTag);
+        end 
         
         function[] = decorarGrafica(~, figura, titulo, xTag, yTag)
             figure(figura);

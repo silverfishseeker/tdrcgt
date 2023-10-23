@@ -108,6 +108,6 @@ fmax_2 = fs_2/2;
 
 t = 0:1/fs_2:tmax_2;
 [f2, X_2] = FuncUtils.FourierAnalis(x_2,fmax_2);
-u.graficarBarras(f2, X_2, 5, "Analisis de Fourier de la señal en Datos.mat", "frecuencia", "amplitud");
+u.graficarBarras(f2, X_2, 6, "Analisis de Fourier de la señal en Datos.mat", "frecuencia", "amplitud");
 
 

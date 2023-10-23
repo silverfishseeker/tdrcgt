@@ -15,7 +15,7 @@ fs = 2000;
 nTs = 10;
 
 
-%% Señal sinuiduidal %%
+%% 1. Señal senoidal %%
 % Tiempo final
 tmax=nTs*T;
 % Calcular intervalo de muestreo de tiempo
@@ -30,7 +30,7 @@ u.graficar(t,x_t,1,"","", "");
 hold on;
 
 
-%% Señal discreta %%
+%% 2. Señal discreta %%
 % Calculo de muestreo
 ts = 1/fs;
 n=(0:ts:tmax-ts);
@@ -38,11 +38,11 @@ n=(0:ts:tmax-ts);
 x_n=A*sin(2*pi*f0*n);
 
 hold on;
-u.graficarBarras(n,x_n,1,"Onda sinuisuidal","tiempo", "amplitud");
+u.graficarBarras(n,x_n,1,"Onda senoidal","tiempo", "amplitud");
 hold off;
 
 
-%% Análisis en frecuencia
+%% 3. Análisis en frecuencia
 % fft
 X=fft(x_n);
 
@@ -64,12 +64,12 @@ f = 0:fstep:fs/2;
 u.graficarBarras(f,X,3,"Transformada de Fourier (real)","frecuencia", "amplitud");
 
 
-%% Analisis frecuencias mezcla
+%% 3. Analisis frecuencias mezcla
 % Amplitud 2
 A_2=8;
 % Frecuencia base 2
 f0_2=250;
-% Segunda sinuisoidal
+% Segunda senoidal
 x_n2 = A_2*sin(2*pi*f0_2*n);
 
 % Señal suma
@@ -77,13 +77,13 @@ x_mix = x_n + x_n2;
 
 figure(4);
 subplot(3,1,1);
-u.graficar(n,x_n, 4, "Sinusoidal f=50", "tiempo", "amplitud");
+u.graficar(n,x_n, 4, "Senoidal f=50", "tiempo", "amplitud");
 
 subplot(3,1,2);
-u.graficar(n,x_n, 4, "Sinusoidal f=250", "tiempo", "amplitud");
+u.graficar(n,x_n, 4, "Senoidal f=250", "tiempo", "amplitud");
 
 subplot(3,1,3)
-u.graficar(n,x_mix, 4, "Mezcla de funciones sinusoidales", "tiempo", "amplitud");
+u.graficar(n,x_mix, 4, "Mezcla de funciones senoidales", "tiempo", "amplitud");
 
 % Analisis de Fourier
 [f, X_mix] = FuncUtils.FourierAnalis(x_mix,fs);

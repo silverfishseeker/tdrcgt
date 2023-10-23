@@ -1,6 +1,6 @@
-classdef utils
+classdef RepUtils
    methods
-       function obj = utils
+       function obj = RepUtils
            clf;
        end
        function [] = complexRepresentation(self, x,y)
@@ -23,19 +23,20 @@ classdef utils
         
         function[] = graficar(self, x, y, figura, titulo, xTag, yTag)
             % Grafica continua
-            self.decorarGrafica(figura, titulo, xTag, yTag);
+            figure(figura);
             plot(x,y);
+            self.decorarGrafica(figura, titulo, xTag, yTag);
         end
         
         function[] = graficarBarras(self, x, y, figura, titulo, xTag, yTag)
             % Grafica de barras
-            self.decorarGrafica(figura, titulo, xTag, yTag);
+            figure(figura);
             stem(x,y);
+            self.decorarGrafica(figura, titulo, xTag, yTag);
         end
         
         
         function[] = decorarGrafica(~, figura, titulo, xTag, yTag)
-            figure(figura);
             title(titulo);
             grid on;
             xlabel(xTag);

@@ -2,3 +2,5 @@
     * x: número de la práctica.
     * a1: primer apellido de uno de los alumnos.
     * a2: primer apellido del otro alumno.
+
+* Mirar por qué las potencias salen diferentes en P1_2

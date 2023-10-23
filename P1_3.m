@@ -33,7 +33,7 @@ hold on;
 %% 2. Señal discreta %%
 % Calculo de muestreo
 ts = 1/fs;
-n=(0:ts:tmax-ts);
+n=0:ts:tmax-ts;
 % Funcion
 x_n=A*sin(2*pi*f0*n);
 
@@ -95,6 +95,19 @@ u.graficarBarras(f, X_mix, 5, "Analisis de Fourier de la mezcla", "frecuencia", 
 pm_t = sum(abs(x_n).^2);
 disp(['Potencia media por tiempo:  ' num2str(pm_t)]);
 
-pm_f = sum(abs(fft(X_n)).^2);
+pm_f = sum(abs(fft(x_n)).^2) / length(x_n);
 disp(['Potencia media por fourier: ' num2str(pm_f)]);
+
+%% 6. Carga y FFT de una señal real
+
+load("Datos.mat");
+x_2 = Datos;
+fs_2 = 4439;
+tmax_2 = length(x_2) / fs_2;
+fmax_2 = fs_2/2;
+
+t = 0:1/fs_2:tmax_2;
+[f2, X_2] = FuncUtils.FourierAnalis(x_2,fmax_2);
+u.graficarBarras(f2, X_2, 5, "Analisis de Fourier de la señal en Datos.mat", "frecuencia", "amplitud");
+
 

@@ -6,36 +6,51 @@ Tm = 1/fm;
 t = 0:Tm:T-Tm;
 
 %Toma de datos por input
-cadena = input('Ingrese una cadena de 12 bits: ', 's');
-n = input('Ingrese el numero de bits: ');
+%cadena = input('Ingrese una cadena de 12 bits: ', 's');
+%n = input('Ingrese el numero de bits: ');
 
-%cadena ='111010011010';
-%n = 2; %Numero de bits
+cadena ='111010011010';
+n = 4; %Numero de bits
 
 % Apartado 1
 % Calculo numero de fases para modulacion 8-psk
-fase8psk = 0:2*pi/8 : 2*pi-2*pi/8;
-
-%Representacion todos los simbolos posibles
-figure(1)
-polarplot(fase8psk(1),A,'*');
-hold on
-
-for i=2:length(fase8psk)
-    polarplot(fase8psk(i),A,'*');
-end
-
-hold off
-title('Espacio de la señal de la modulación 8-PSK');
-legend('000','001','010','011','100','101','110','111');
-
-%Apartado 2
 filas = 2^n;
 fase = 0:2*pi/filas : 2*pi-2*pi/filas;
 
+%Representacion todos los simbolos posibles
+figure(1)
+polarplot(fase(1),A,'*');
+hold on
+
+for i=2:length(fase)
+    polarplot(fase(i),A,'*');
+end
+
+hold off
+
+% Muestra una leyenda segun el numero de bits
+if n==2
+    title('Espacio de la señal de la modulación 4-PSK');
+    legend('00','01', '10', '11');
+end
+
+if n==3
+    title('Espacio de la señal de la modulación 8-PSK');
+    legend('000','001','010','011','100','101','110','111');
+end
+
+if n==4
+    title('Espacio de la señal de la modulación 16-PSK');
+    legend('0000','0001','0010','0011','0100','0101','0110','0111','1000' ...
+        ,'1001','1010','1011','1100','1101','1110','1111');
+end
+
+
+%Apartado 2
 % Se asigna la cadena a una matriz y se pasa de binario a decimal
 %Matriz = reshape(cadena,n,[])';
-B = bin2dec(reshape(cadena,n,[])');
+R = reshape(cadena,n,[])';
+B = bin2dec(R);
 
 %Se crea una matriz de filas variable segun los bits elegidos
 M = zeros(length(B),length(t));

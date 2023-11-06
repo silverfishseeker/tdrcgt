@@ -6,13 +6,13 @@ Tm = 1/fm;
 t = 0:Tm:T-Tm;
 
 %Toma de datos por input
-%cadena = input('Ingrese una cadena de 12 bits: ', 's');
-%n = input('Ingrese el numero de bits: ');
+cadena = input('Ingrese una cadena de 12 bits: ', 's');
+n = input('Ingrese el numero de bits: ');
 
-cadena ='111010011010';
-n = 4; %Numero de bits
+%cadena ='111010011010';
+%n = 4; %Numero de bits
 
-% Apartado 1
+%% Apartado 1
 % Calculo numero de fases para modulacion 8-psk
 filas = 2^n;
 fase = 0:2*pi/filas : 2*pi-2*pi/filas;
@@ -21,11 +21,9 @@ fase = 0:2*pi/filas : 2*pi-2*pi/filas;
 figure(1)
 polarplot(fase(1),A,'*');
 hold on
-
 for i=2:length(fase)
     polarplot(fase(i),A,'*');
 end
-
 hold off
 
 % Muestra una leyenda segun el numero de bits
@@ -46,19 +44,15 @@ if n==4
 end
 
 
-%Apartado 2
+%% Apartado 2
 % Se asigna la cadena a una matriz y se pasa de binario a decimal
-%Matriz = reshape(cadena,n,[])';
-R = reshape(cadena,n,[])';
-B = bin2dec(R);
+B = bin2dec(reshape(cadena,n,[])');
 
 %Se crea una matriz de filas variable segun los bits elegidos
 M = zeros(length(B),length(t));
-numFase = zeros(1,length(B));
 
 for i = 1:length(B)
-    numFase(i) = fase(B(i)+1);
-    M(i,:) = A*cos(2*pi*f*t + numFase(i));
+    M(i,:) = A*cos(2*pi*f*t + fase(B(i)+1));
 end
 
 %Se transforma la matriz anterior en un vector
@@ -72,6 +66,6 @@ figure(2)
 plot(t2,MatrizCompleta)
 title('Representacion cadena de datos: ');
 grid on;
-xlabel('Tiempo');
+xlabel('Tiempo (s)');
 ylabel('Amplitud');
 
